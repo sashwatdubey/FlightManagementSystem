@@ -4,30 +4,31 @@ import java.sql.Date;
 
 public class ScheduleFlight {
 
-	private Integer flightNumber;
-	private Integer availableSeats;
-	private Double cost;
+	private int flightNumber;
+	private int availableSeats;
+	private double cost;
 	private String sourceAirport;
 	private String destinationAirport;
 	private Date departureDate;
 	private Date arrivalDate;
 	private String flightStatus;
-	public Integer getFlightNumber() {
+	
+	public int getFlightNumber() {
 		return flightNumber;
 	}
-	public void setFlightNumber(Integer flightNumber) {
+	public void setFlightNumber(int flightNumber) {
 		this.flightNumber = flightNumber;
 	}
-	public Integer getAvailableSeats() {
+	public int getAvailableSeats() {
 		return availableSeats;
 	}
-	public void setAvailableSeats(Integer availableSeats) {
+	public void setAvailableSeats(int availableSeats) {
 		this.availableSeats = availableSeats;
 	}
-	public Double getCost() {
+	public double getCost() {
 		return cost;
 	}
-	public void setCost(Double cost) {
+	public void setCost(double cost) {
 		this.cost = cost;
 	}
 	public String getSourceAirport() {
@@ -60,11 +61,21 @@ public class ScheduleFlight {
 	public void setFlightStatus(String flightStatus) {
 		this.flightStatus = flightStatus;
 	}
-	
-	public ScheduleFlight(Integer flightNumber, Integer availableSeats, Double cost, String sourceAirport,
+	public ScheduleFlight(int flightNumber, int availableSeats, double cost, String sourceAirport,
 			String destinationAirport, Date departureDate, Date arrivalDate, String flightStatus) {
 		super();
 		this.flightNumber = flightNumber;
+		this.availableSeats = availableSeats;
+		this.cost = cost;
+		this.sourceAirport = sourceAirport;
+		this.destinationAirport = destinationAirport;
+		this.departureDate = departureDate;
+		this.arrivalDate = arrivalDate;
+		this.flightStatus = flightStatus;
+	}
+	public ScheduleFlight(int availableSeats, double cost, String sourceAirport, String destinationAirport,
+			Date departureDate, Date arrivalDate, String flightStatus) {
+		super();
 		this.availableSeats = availableSeats;
 		this.cost = cost;
 		this.sourceAirport = sourceAirport;
@@ -77,18 +88,6 @@ public class ScheduleFlight {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public ScheduleFlight(Integer availableSeats, Double cost, String sourceAirport, String destinationAirport,
-			Date departureDate, Date arrivalDate, String flightStatus) {
-		super();
-		this.availableSeats = availableSeats;
-		this.cost = cost;
-		this.sourceAirport = sourceAirport;
-		this.destinationAirport = destinationAirport;
-		this.departureDate = departureDate;
-		this.arrivalDate = arrivalDate;
-		this.flightStatus = flightStatus;
-	}
-	
 	@Override
 	public String toString() {
 		return "ScheduleFlight [flightNumber=" + flightNumber + ", availableSeats=" + availableSeats + ", cost=" + cost

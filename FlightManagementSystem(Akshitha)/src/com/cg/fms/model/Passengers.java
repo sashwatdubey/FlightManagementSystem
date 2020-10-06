@@ -2,16 +2,16 @@ package com.cg.fms.model;
 
 public class Passengers {
 	
-	private Integer pnrNumber;
+	private int pnrNumber;
 	private String passengerName;
-	private Integer passengerAge;
-	private Long passengerUIN;
-	private Double luggage;
+	private int passengerAge;
+	private long passengerUIN;
+	private double luggage;
 	
-	public Integer getPnrNumber() {
+	public int getPnrNumber() {
 		return pnrNumber;
 	}
-	public void setPnrNumber(Integer pnrNumber) {
+	public void setPnrNumber(int pnrNumber) {
 		this.pnrNumber = pnrNumber;
 	}
 	public String getPassengerName() {
@@ -20,28 +20,34 @@ public class Passengers {
 	public void setPassengerName(String passengerName) {
 		this.passengerName = passengerName;
 	}
-	public Integer getPassengerAge() {
+	public int getPassengerAge() {
 		return passengerAge;
 	}
-	public void setPassengerAge(Integer passengerAge) {
+	public void setPassengerAge(int passengerAge) {
 		this.passengerAge = passengerAge;
 	}
-	public Long getPassengerUIN() {
+	public long getPassengerUIN() {
 		return passengerUIN;
 	}
-	public void setPassengerUIN(Long passengerUIN) {
+	public void setPassengerUIN(long passengerUIN) {
 		this.passengerUIN = passengerUIN;
 	}
-	public Double getLuggage() {
+	public double getLuggage() {
 		return luggage;
 	}
-	public void setLuggage(Double luggage) {
+	public void setLuggage(double luggage) {
 		this.luggage = luggage;
 	}
-	
-	public Passengers(Integer pnrNumber, String passengerName, Integer passengerAge, Long passengerUIN, Double luggage) {
+	public Passengers(int pnrNumber, String passengerName, int passengerAge, long passengerUIN, double luggage) {
 		super();
 		this.pnrNumber = pnrNumber;
+		this.passengerName = passengerName;
+		this.passengerAge = passengerAge;
+		this.passengerUIN = passengerUIN;
+		this.luggage = luggage;
+	}
+	public Passengers(String passengerName, int passengerAge, long passengerUIN, double luggage) {
+		super();
 		this.passengerName = passengerName;
 		this.passengerAge = passengerAge;
 		this.passengerUIN = passengerUIN;
@@ -50,19 +56,6 @@ public class Passengers {
 	public Passengers() {
 		super();
 		// TODO Auto-generated constructor stub
-	}
-	public Passengers(String passengerName, Integer passengerAge,Long passengerUIN, Double luggage) {
-		super();
-		this.passengerName = passengerName;
-		this.passengerAge = passengerAge;
-		this.passengerUIN = passengerUIN;
-		this.luggage = luggage;
-	}
-	
-	@Override
-	public String toString() {
-		return "Passengers [pnrNumber=" + pnrNumber + ", passengerName=" + passengerName + ", passengerAge="
-				+ passengerAge + ", passengerUIN=" + passengerUIN + ", luggage=" + luggage + "]";
 	}
 	
 	
