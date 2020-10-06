@@ -35,7 +35,7 @@ public class AdminDAO implements IAdminDAO {
 	preparedStatement.executeBatch();
 		 resultSet =preparedStatement.getGeneratedKeys();
 		while(resultSet.next()){
-			System.out.println(resultSet.getInt(1));
+			rows = resultSet.getInt(1);
 		}
 		//rows = ps.executeUpdate();
 		

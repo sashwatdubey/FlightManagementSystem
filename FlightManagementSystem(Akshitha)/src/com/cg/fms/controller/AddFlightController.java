@@ -1,8 +1,9 @@
 package com.cg.fms.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
-
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,20 +24,33 @@ public class AddFlightController extends HttpServlet {
 	IAdminService service = new AdminService();
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	
     String flightModel = request.getParameter("flightmodel");
 	String carrierName = request.getParameter("carriername");
 	int seatCapacity = Integer.parseInt(request.getParameter("seatcapacity"));
 	Flight flight = new Flight(flightModel, carrierName, seatCapacity);
+	PrintWriter out = response.getWriter();
+	RequestDispatcher dispatcher =null;
 	
 	if(flightModel == null & carrierName == null & seatCapacity == 0 ) {
-		
+		out.println("please enter correct values");
+		dispatcher = request.getRequestDispatcher("addFlight.jsp");
+		dispatcher.include(request, response);
 	
- } else {
+	} else {
 
 	 try {
 		isCreated = service.addFlights(flightModel,carrierName,seatCapacity);
-	} catch (FMSException e) {
+		if(isCreated > 0) {
+		out.println("successfully added");
+		dispatcher = request.getRequestDispatcher("addFlight.jsp");
+		dispatcher.include(request, response);
+		} else {
+			out.println("problem while inserting values");
+			dispatcher = request.getRequestDispatcher("addFlight.jsp");
+			dispatcher.include(request, response);
+		}
+	 } catch (FMSException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
