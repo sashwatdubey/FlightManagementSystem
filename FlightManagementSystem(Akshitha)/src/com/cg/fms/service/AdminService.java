@@ -11,9 +11,9 @@ public class AdminService implements IAdminService{
 
 	IAdminDAO adminDao = new AdminDAO();
 
-	public int addFlights(String flightModel, String carrierName, int seatCapacity) throws FMSException {
+	public int addFlights(Flight flight) throws FMSException {
 		// TODO Auto-generated method stub
-		return adminDao.addFlights(flightModel, carrierName, seatCapacity);
+		return adminDao.addFlights(flight);
 	}
 
 	public List<Flight> viewFlights() throws FMSException {

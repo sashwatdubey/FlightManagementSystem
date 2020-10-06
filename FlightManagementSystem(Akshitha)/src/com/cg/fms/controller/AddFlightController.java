@@ -40,7 +40,7 @@ public class AddFlightController extends HttpServlet {
 	} else {
 
 	 try {
-		isCreated = service.addFlights(flightModel,carrierName,seatCapacity);
+		isCreated = service.addFlights(flight);
 		if(isCreated > 0) {
 		out.println("successfully added");
 		dispatcher = request.getRequestDispatcher("addFlight.jsp");

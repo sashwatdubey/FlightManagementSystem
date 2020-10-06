@@ -5,7 +5,7 @@ import com.cg.fms.model.User;
 
 public interface IUserDAO {
 
-	public boolean isUserExists(String userName) throws FMSException;
+	public boolean isUserExists(String emailId) throws FMSException;
 	
 	public int accountCreation(User user) throws FMSException;
 

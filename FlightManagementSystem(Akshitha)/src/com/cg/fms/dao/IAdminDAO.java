@@ -9,7 +9,7 @@ import com.cg.fms.model.User;
 
 public interface IAdminDAO {
 
-	public int addFlights(String flightModel, String carrierName, int seatCapacity) throws FMSException;
+	public int addFlights(Flight flight) throws FMSException;
 
 	public List<Flight> viewFlights() throws FMSException;
 	

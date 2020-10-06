@@ -31,28 +31,31 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
     PrintWriter out = response.getWriter();
 	RequestDispatcher dispatcher = null;
 	boolean isUserExists = false;
-	
 	String userName = request.getParameter("uname");
 	String password = request.getParameter("upass");
 	Long mobileNumber = Long.parseLong(request.getParameter("umobile"));
 	String emailId = request.getParameter("uemail");
 	
 	try {
-		User user = new User(userName, password, mobileNumber, emailId);
-		//isUserExists = service.isUserExists(userName);
-		//if(isUserExists) {
-			//System.out.println("user already exists");
-		//} else {
-			isCreated = service.accountCreation(user);
-			if (isCreated > 0) {
-				out.println("Account Created Successfully!!");
-				dispatcher = request.getRequestDispatcher("userPage.jsp");
+			User user = new User(userName, password, mobileNumber, emailId);
+			isUserExists = service.isUserExists(emailId);
+			if(isUserExists) {
+				out.println("Account already exists! please login");
+				dispatcher = request.getRequestDispatcher("Login.jsp");
 				dispatcher.forward(request, response);
 			} else {
-				System.out.println("Problem occured while inserting");
+				isCreated = service.accountCreation(user);
+				if (isCreated > 0) {
+					out.println("Account Created Successfully!!");
+					dispatcher = request.getRequestDispatcher("Login.jsp");
+					dispatcher.forward(request, response);
+				} else {
+					out.println("Problem occured while inserting");
+					dispatcher = request.getRequestDispatcher("Register.jsp");
+					dispatcher.forward(request, response);
+				}
 			}
-		//}
-		
+			
 	} catch (FMSException e) {
 		System.out.println(e.getMessage());
 	}

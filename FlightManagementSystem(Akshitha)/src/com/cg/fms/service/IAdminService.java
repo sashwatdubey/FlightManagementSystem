@@ -6,7 +6,7 @@ import java.util.*;
 
 public interface IAdminService {
 	
-	public int addFlights(String flightModel, String carrierName, int seatCapacity) throws FMSException;
+	public int addFlights(Flight flight) throws FMSException;
 	
 	public List<Flight> viewFlights() throws FMSException;
 	

@@ -27,18 +27,14 @@ import com.cg.fms.utility.*;;
 public class LoginController extends HttpServlet {
 	IUserService service = new UserService();
 	int isLogged =0;
-	RequestDispatcher dispatcher = null;
 @Override
 protected void doPost(HttpServletRequest request, HttpServletResponse response) throws  IOException {
 	String emailId = request.getParameter("uemail");
 	String password = request.getParameter("upass");
 	PrintWriter out = response.getWriter();
-	RequestDispatcher dis =null;
-	//Customers c = new Customers(emailId,password);
+	RequestDispatcher dispatcher =null;
 	
 	try {
-		
-		User user = new User(emailId,password);
 		isLogged = service.userLogin(emailId,password);
 		System.out.println(isLogged);
 		if(isLogged ==0) {
@@ -50,7 +46,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 				dispatcher = request.getRequestDispatcher("Register.jsp");
 				dispatcher.forward(request, response);
 			}
-		}else {
+		} else {
 			out.println("Account Created Successfully!!");
 			dispatcher = request.getRequestDispatcher("userPage.jsp");
 			dispatcher.forward(request, response);

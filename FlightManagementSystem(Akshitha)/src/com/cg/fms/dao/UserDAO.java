@@ -15,15 +15,13 @@ public class UserDAO implements IUserDAO{
 	static Connection connection = null;
 	static PreparedStatement prepareStatement = null;
 	static ResultSet resultSet = null;
-	public boolean isUserExists(String userName) throws FMSException {
+	public boolean isUserExists(String emailId) throws FMSException {
 		boolean found = false;
 		try {
 			connection = JdbcUtility.getConnection();
-			prepareStatement = connection.prepareStatement(CustomerQueryConstants.USER_EXISTS,Statement.RETURN_GENERATED_KEYS );
-			prepareStatement.setString(1, userName);
-			//resultSet = prepareStatement.executeQuery();
-			prepareStatement.addBatch();
-			prepareStatement.executeBatch();
+			prepareStatement = connection.prepareStatement(CustomerQueryConstants.USER_EXISTS);
+			prepareStatement.setString(1, emailId);
+			resultSet = prepareStatement.executeQuery();
 			if(resultSet.next()) {
 				found = true;
 			}
@@ -52,8 +50,7 @@ public class UserDAO implements IUserDAO{
 				  prepareStatement.setString(2,user.getPassword() );
 				  prepareStatement.setLong(3,user.getMobileNumber() );
 				  prepareStatement.setString(4,user.getEmailId() );
-				  prepareStatement.addBatch();
-				  prepareStatement.executeBatch();
+				  prepareStatement.executeUpdate();
 				  resultSet = prepareStatement.getGeneratedKeys();
 				while(resultSet.next()) {
 					isInserted = resultSet.getInt(1);
@@ -62,33 +59,42 @@ public class UserDAO implements IUserDAO{
 				} catch (SQLException | ClassNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				} finally {
+					try {
+						connection.close();
+					} catch (SQLException e) {
+						throw new FMSException("problem while closing");
+					}
+
 				}
 				return isInserted;
 	}
 	public int userLogin(String emailId, String password) throws FMSException {
 		// TODO Auto-generated method stub
 		int rows =0;
-			
-			try {
-				
+		try {
 				connection = JdbcUtility.getConnection();
 				prepareStatement = connection.prepareStatement(CustomerQueryConstants.USER_LOGIN);
 				prepareStatement.setString(1, emailId);
 				prepareStatement.setString(2, password);
 				resultSet = prepareStatement.executeQuery();
-				
 				if(resultSet.next()) {
 					rows =1;
 					
 				}
 			}
-			
 			catch(ClassNotFoundException e) {
 				System.out.println(e.getMessage());
 			}
-			
 			catch(SQLException e) {
 				System.out.println(e.getMessage());
+			} finally {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					throw new FMSException("problem while closing");
+				}
+
 			}
 			return rows;
 	}

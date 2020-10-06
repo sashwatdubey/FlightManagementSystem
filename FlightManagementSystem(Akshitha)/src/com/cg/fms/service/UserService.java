@@ -9,9 +9,9 @@ public class UserService implements IUserService {
 
 	IUserDAO userDao = new UserDAO();
 
-	public boolean isUserExists(String userName) throws FMSException {
+	public boolean isUserExists(String emailId) throws FMSException {
 		// TODO Auto-generated method stub
-		return userDao.isUserExists(userName);
+		return userDao.isUserExists(emailId);
 	}
 
 	public int accountCreation(User user) throws FMSException {
