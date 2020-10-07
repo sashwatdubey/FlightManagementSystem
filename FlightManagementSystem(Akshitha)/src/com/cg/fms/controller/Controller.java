@@ -26,10 +26,7 @@ public class Controller extends HttpServlet {
 		} else if(request.getParameter("viewFlights") != null) {
 			dis = request.getRequestDispatcher("ViewFlightsController");
 			dis.include(request, response);
-		} else if(request.getParameter("scheduleFlight") != null) {
-			dis = request.getRequestDispatcher("scheduleFlight.jsp");
-			dis.include(request, response);
-		} else{
+		} else {
 			dis = request.getRequestDispatcher("searchFlight.jsp");
 			dis.include(request, response);
 		}

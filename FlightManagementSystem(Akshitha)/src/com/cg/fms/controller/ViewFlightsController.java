@@ -31,7 +31,7 @@ public class ViewFlightsController extends HttpServlet{
 			if(flights.size() > 0) {
 				request.setAttribute("flights",flights);
 				dispatcher = request.getRequestDispatcher("viewFlights.jsp");
-			dispatcher.forward(request,response);
+				dispatcher.forward(request,response);
 			} else {
 				out.println("sorry flights are not added yet");
 				dispatcher = request.getRequestDispatcher("adminPage.jsp");

@@ -17,7 +17,7 @@
 <td><c:out value ="${flight.carrierName}"/></td>
 <td><c:out value ="${flight.seatCapacity}"/></td>
 
-<td><a href="ScheduleFlightController?flightNumber ="${flight.flightNumber}">Schedule</a>
+<td><a href="ViewAirportsController?flightNumber=${flight.flightNumber}">Schedule</a>
 </td></tr>
 </c:forEach>
 

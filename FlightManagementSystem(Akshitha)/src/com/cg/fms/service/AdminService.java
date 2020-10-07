@@ -5,7 +5,9 @@ import java.util.List;
 import com.cg.fms.dao.AdminDAO;
 import com.cg.fms.dao.IAdminDAO;
 import com.cg.fms.exceptions.FMSException;
+import com.cg.fms.model.Airport;
 import com.cg.fms.model.Flight;
+import com.cg.fms.model.ScheduleFlight;
 
 public class AdminService implements IAdminService{
 
@@ -19,6 +21,18 @@ public class AdminService implements IAdminService{
 	public List<Flight> viewFlights() throws FMSException {
 		// TODO Auto-generated method stub
 		return adminDao.viewFlights();
+	}
+
+	@Override
+	public List<Airport> viewAirports() throws FMSException {
+		// TODO Auto-generated method stub
+		return adminDao.viewAirports();
+	}
+
+	@Override
+	public int scheduleFlight(ScheduleFlight scheduleFlight) throws FMSException {
+		// TODO Auto-generated method stub
+		return adminDao.scheduleFlight(scheduleFlight);
 	}
 	
 	
