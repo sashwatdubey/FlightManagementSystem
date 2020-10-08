@@ -128,11 +128,11 @@ public class AdminDAO implements IAdminDAO {
 			preparedStatement.setDouble(3, scheduleFlight.getCost());
 			preparedStatement.setString(4, scheduleFlight.getSourceAirport());
 			preparedStatement.setString(5, scheduleFlight.getDestinationAirport());
-			preparedStatement.setString(6, scheduleFlight.getFlightStatus());
-			preparedStatement.setDate(7, new Date(scheduleFlight.getDepartureDate().getTime()));
-			preparedStatement.setDate(8, new Date(scheduleFlight.getArrivalDate().getTime()));
-			preparedStatement.setString(9, scheduleFlight.getArrivalTime());
-			preparedStatement.setString(10, scheduleFlight.getDepartureTime());
+			preparedStatement.setString(10, scheduleFlight.getFlightStatus());
+			preparedStatement.setDate(6, new Date(scheduleFlight.getDepartureDate().getTime()));
+			preparedStatement.setDate(7, new Date(scheduleFlight.getArrivalDate().getTime()));
+			preparedStatement.setString(8, scheduleFlight.getArrivalTime());
+			preparedStatement.setString(9, scheduleFlight.getDepartureTime());
 			rows = preparedStatement.executeUpdate();
 			//resultSet =preparedStatement.getGeneratedKeys();
 		} catch (SQLException e) {
@@ -150,5 +150,44 @@ public class AdminDAO implements IAdminDAO {
 	
 		}
 		return rows;
+	}
+
+	@Override
+	public List<ScheduleFlight> viewScheduleFlights() throws FMSException {
+		List<ScheduleFlight> scheduleFlights = new ArrayList<ScheduleFlight>();
+		ScheduleFlight scheduleFlight = null;
+		
+		try {
+			connection = JdbcUtility.getConnection();
+			preparedStatement = connection.prepareStatement(AdminQueryConstants.VIEW_SCHEDULE_FLIGHTS);
+			resultSet = preparedStatement.executeQuery();
+			while(resultSet.next()) {
+				scheduleFlight= new ScheduleFlight();
+				scheduleFlight.setFlightNumber(resultSet.getInt(1));
+				scheduleFlight.setAvailableSeats(resultSet.getInt(2));
+				scheduleFlight.setCost(resultSet.getDouble(3));
+				scheduleFlight.setSourceAirport(resultSet.getString(4));
+				scheduleFlight.setDestinationAirport(resultSet.getString(5));
+				scheduleFlight.setDepartureDate(resultSet.getDate(6));
+				scheduleFlight.setArrivalDate(resultSet.getDate(7));
+				scheduleFlight.setArrivalTime(resultSet.getString(8));
+				scheduleFlight.setDepartureTime(resultSet.getString(9));
+				scheduleFlight.setFlightStatus(resultSet.getString(10));
+				scheduleFlights.add(scheduleFlight);
+			}
+		
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} catch(ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new FMSException("problem while closing");
+			}
+
+		}
+		return scheduleFlights;
 	}
 }

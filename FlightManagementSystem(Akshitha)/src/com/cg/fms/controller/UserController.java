@@ -9,26 +9,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-@WebServlet("/Controller")
-public class Controller extends HttpServlet {
+@WebServlet("/UserController")
+public class UserController   extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		RequestDispatcher dis = null;
 		
-		if(request.getParameter("addFlight") != null) {
-			dis = request.getRequestDispatcher("addFlight.jsp");
+		if(request.getParameter("checkAvailableFlights") != null) {
+			dis = request.getRequestDispatcher("UserViewAirportsController");
 			dis.include(request, response);
-		} else if(request.getParameter("viewScheduledFlight") != null) {
-			dis = request.getRequestDispatcher("viewScheduleFlight.jsp");
+		} else if(request.getParameter("viewBookings") != null) {
+			dis = request.getRequestDispatcher("viewBookings.jsp");
 			dis.include(request, response);
-		} else if(request.getParameter("viewFlights") != null) {
-			dis = request.getRequestDispatcher("ViewFlightsController");
-			dis.include(request, response);
-		} else {
-			dis = request.getRequestDispatcher("searchFlight.jsp");
-			dis.include(request, response);
-		}
+		} 
 }
 }
+
+
+

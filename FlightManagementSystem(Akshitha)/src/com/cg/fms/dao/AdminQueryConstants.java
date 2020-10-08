@@ -6,4 +6,5 @@ public interface AdminQueryConstants {
 	String VIEW_FLIGHTS = "select * from flight";
 	String VIEW_AIRPORTS = "select * from airport";
 	String SCHEDULE_FLIGHT = "insert into scheduleflight values(?,?,?,?,?,?,?,?,?,?)";
+	String VIEW_SCHEDULE_FLIGHTS = "select * from scheduleflight";
 }

@@ -35,6 +35,10 @@ public class AdminService implements IAdminService{
 		return adminDao.scheduleFlight(scheduleFlight);
 	}
 	
-	
+	public List<ScheduleFlight> viewScheduleFlights() throws FMSException {
+		// TODO Auto-generated method stub
+		return adminDao.viewScheduleFlights();
+	}
+
 
 }

@@ -9,10 +9,10 @@
 <body>
 <form action="UserController" method = "post">
 <input type = "submit" value = "Check for available flights" name = "checkAvailableFlights">
-<input type = "submit" value = "Make Booking" name = "bookFlight">
+<!-- <input type = "submit" value = "Make Booking" name = "bookFlight"> -->
 <input type = "submit" value = "View Bookings made" name = "viewBookings">
-<input type = "submit" value = "Cancel Booking" name = "cancelBooking">
-<input type = "submit" value = "Modify Booking" name = "modifyBooking">
+<!-- <input type = "submit" value = "Cancel Booking" name = "cancelBooking">
+<input type = "submit" value = "Modify Booking" name = "modifyBooking"> -->
 
 
 </form>

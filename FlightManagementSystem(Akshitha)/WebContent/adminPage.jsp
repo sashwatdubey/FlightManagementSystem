@@ -8,12 +8,12 @@
 </head>
 <body>
 
-<form action="Controller" method = "post">
+<form action="AdminController" method = "post">
 <input type = "submit" value = "Add a flight" name = "addFlight">
 <input type = "submit" value = "View Flights" name = "viewFlights">
 <input type = "submit" value = "View Scheduled flight" name = "viewScheduledFlight">
 
-<input type = "submit" value = "Schedule a flight" name = "scheduleFlight">
+<!-- <input type = "submit" value = "Schedule a flight" name = "scheduleFlight"> -->
 <input type = "submit" value = "Search a flight" name = "searchFlight">
 
 

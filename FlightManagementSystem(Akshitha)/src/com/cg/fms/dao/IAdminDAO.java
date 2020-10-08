@@ -19,4 +19,6 @@ public interface IAdminDAO {
 	
 	public int scheduleFlight(ScheduleFlight scheduleFlight) throws FMSException;
 	
+	public List<ScheduleFlight> viewScheduleFlights() throws FMSException;
+	
 }

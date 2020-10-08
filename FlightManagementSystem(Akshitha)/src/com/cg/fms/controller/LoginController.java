@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,7 +36,9 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 	RequestDispatcher dispatcher =null;
 	
 	try {
+		
 		isLogged = service.userLogin(emailId,password);
+		
 		System.out.println(isLogged);
 		if(isLogged ==0) {
 			if(emailId.equals("admin@gmail.com") && password.equals("admin")) {
