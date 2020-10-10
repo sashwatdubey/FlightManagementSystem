@@ -20,7 +20,7 @@ public class UserController   extends HttpServlet {
 			dis = request.getRequestDispatcher("UserViewAirportsController");
 			dis.include(request, response);
 		} else if(request.getParameter("viewBookings") != null) {
-			dis = request.getRequestDispatcher("viewBookings.jsp");
+			dis = request.getRequestDispatcher("ViewBookingController");
 			dis.include(request, response);
 		} 
 }

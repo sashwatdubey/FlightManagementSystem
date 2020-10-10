@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.cg.fms.exceptions.FMSException;
+import com.cg.fms.model.Booking;
+import com.cg.fms.model.Passengers;
 import com.cg.fms.model.ScheduleFlight;
 import com.cg.fms.model.User;
 import com.cg.fms.utility.JdbcUtility;
@@ -82,7 +84,7 @@ public class UserDAO implements IUserDAO{
 				prepareStatement.setString(1, emailId);
 				prepareStatement.setString(2, password);
 				resultSet = prepareStatement.executeQuery();
-				if(resultSet.next()) {
+				while(resultSet.next()) {
 					rows = resultSet.getInt(1);
 					
 				}
@@ -144,6 +146,217 @@ public class UserDAO implements IUserDAO{
 		}
 		return scheduleFlights;
 	}
+	@Override
+	public int addPasseneger(Passengers passenger) throws FMSException {
+		
+		int isInserted = 0;
+		try {
+		  connection = JdbcUtility.getConnection();
+		  prepareStatement = connection.prepareStatement(CustomerQueryConstants.ADD_PASSENGER, Statement.RETURN_GENERATED_KEYS );
+		  prepareStatement.setString(1,passenger.getPassengerName());
+		  prepareStatement.setInt(2,passenger.getPassengerAge() );
+		  prepareStatement.setLong(3,passenger.getPassengerUIN() );
+		  prepareStatement.setDouble(4,passenger.getLuggage());
+		  prepareStatement.setInt(5,passenger.getUserId() );
+		  prepareStatement.setString(6,passenger.getPassengerGender());
+		  prepareStatement.setString(7, passenger.getBookingDate());
+		  
+
+		  prepareStatement.executeUpdate();
+		  resultSet = prepareStatement.getGeneratedKeys();
+		while(resultSet.next()) {
+			isInserted = resultSet.getInt(1);
+		}
+		  System.out.println("inserted successfully");
+		} catch (SQLException | ClassNotFoundException e) {
+			
+			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new FMSException("problem while closing");
+			}
+
+		}
+		return isInserted;
+		
+		
+	}
+	@Override
+	public int makeBooking(Booking booking) throws FMSException {
+			
+		int isInserted = 0;
+		try {
+		  connection = JdbcUtility.getConnection();
+		  prepareStatement = connection.prepareStatement(CustomerQueryConstants.MAKE_BOOKING, Statement.RETURN_GENERATED_KEYS );
+		  prepareStatement.setInt(1,booking.getUserId());
+		  prepareStatement.setString(2,booking.getBookingDate() );
+		  prepareStatement.setDouble(3,booking.getCost());
+		  prepareStatement.setDouble(4,booking.getPassengerCount());
+		  prepareStatement.setString(5,booking.getBookingState() );
+		  prepareStatement.setInt(6,booking.getFlightNumber());
+		  
+		  
+
+		  prepareStatement.executeUpdate();
+		  resultSet = prepareStatement.getGeneratedKeys();
+		while(resultSet.next()) {
+			isInserted = resultSet.getInt(1);
+		}
+		  System.out.println("inserted successfully");
+		} catch (SQLException | ClassNotFoundException e) {
+			
+			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new FMSException("problem while closing");
+			}
+
+		}
+		return isInserted;
+		
+	}
+	@Override
+	public List<Booking> viewBookings() throws FMSException {
+		
+		List<Booking> bookings = new ArrayList<Booking>();
+		Booking booking  = null;
+		
+		try {
+			connection = JdbcUtility.getConnection();
+			prepareStatement = connection.prepareStatement(CustomerQueryConstants.VIEW_BOOKINGS);
+			resultSet = prepareStatement.executeQuery();
+			
+			while(resultSet.next()) {
+				booking= new Booking();
+				booking.setBookingId(resultSet.getInt(1));
+				booking.setUserId(resultSet.getInt(2));
+				booking.setBookingDate(resultSet.getString(3));
+				booking.setCost(resultSet.getDouble(4));
+				booking.setPassengerCount(resultSet.getInt(5));
+				booking.setBookingState(resultSet.getString(6));
+				booking.setFlightNumber(resultSet.getInt(7));
+			
+				bookings.add(booking);
+			}
+		
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} catch(ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new FMSException("problem while closing");
+			}
+
+		}
+		return bookings;
+	}
+	@Override
+	public boolean cancelBooking(int bookingId) throws FMSException {
+		boolean isCancelled = false;
+		int rowUpdate = 0;
+		try {
+			connection = JdbcUtility.getConnection();
+			prepareStatement = connection.prepareStatement(CustomerQueryConstants.CANCEL_BOOKING);
+			prepareStatement.setInt(1, bookingId);
+			
+			 rowUpdate= prepareStatement.executeUpdate();
+			if(rowUpdate>0) {
+				isCancelled = true;
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		} catch(ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new FMSException("problem while closing");
+			}
+
+		}	
+		return isCancelled;
+	}
+	
+	@Override
+	public boolean deletePassengers(String bookingDate, int userId) throws FMSException {
+		
+		boolean isDeleted = false;
+		int rowUpdate = 0;
+		
+		try {
+			connection = JdbcUtility.getConnection();
+			prepareStatement = connection.prepareStatement(CustomerQueryConstants.DELETE_PASSENGERS);
+			prepareStatement.setInt(1, userId);
+			prepareStatement.setString(2, bookingDate);
+			rowUpdate = prepareStatement.executeUpdate();
+			if(rowUpdate > 0) {
+				isDeleted = true;
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		} catch(ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new FMSException("problem while closing");
+			}
+
+		}	
+		return isDeleted;
+	}
+	@Override
+	public Booking getPassengersDetails(int bookingId) throws FMSException {
+			
+		Booking booking = new Booking();
+		
+		try {
+			connection = JdbcUtility.getConnection();
+			prepareStatement = connection.prepareStatement(CustomerQueryConstants.GET_BOOKING_DETAILS);
+			prepareStatement.setInt(1, bookingId);
+			
+			resultSet = prepareStatement.executeQuery();
+			
+			
+			while(resultSet.next()) {
+				booking.setBookingId(resultSet.getInt(1));
+				booking.setUserId(resultSet.getInt(2));
+				booking.setBookingDate(resultSet.getString(3));
+				booking.setCost(resultSet.getDouble(4));
+				booking.setPassengerCount(resultSet.getInt(5));
+				booking.setBookingState(resultSet.getString(6));
+				booking.setFlightNumber(resultSet.getInt(7));
+			
+			
+			}
+		
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} catch(ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new FMSException("problem while closing");
+			}
+
+		}
+		return booking;
+		
+	}
+	
 	
 
 	

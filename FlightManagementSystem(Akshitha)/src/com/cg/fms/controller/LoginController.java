@@ -34,11 +34,11 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 	String password = request.getParameter("upass");
 	PrintWriter out = response.getWriter();
 	RequestDispatcher dispatcher =null;
-	
+	ServletContext context = request.getServletContext();
 	try {
 		
 		isLogged = service.userLogin(emailId,password);
-		
+		context.setAttribute("userId", isLogged);
 		System.out.println(isLogged);
 		if(isLogged ==0) {
 			if(emailId.equals("admin@gmail.com") && password.equals("admin")) {

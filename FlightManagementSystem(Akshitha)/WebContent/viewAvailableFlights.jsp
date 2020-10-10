@@ -42,7 +42,7 @@ Destination Airport:<select name="destination">
 <td><c:out value ="${scheduleFlight.departureTime}"/></td>
 <td><c:out value ="${scheduleFlight.flightStatus}"/></td>
 
-<td><a href="BookingController?flightNumber=${scheduleFlight.flightNumber}">Book</a>
+<td><a href="passengers.jsp?flightNumber=${scheduleFlight.flightNumber}">Book</a>
 </td></tr>
 </c:forEach>
 

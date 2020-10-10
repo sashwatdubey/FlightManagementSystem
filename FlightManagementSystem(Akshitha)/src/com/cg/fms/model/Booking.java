@@ -6,11 +6,39 @@ public class Booking {
 
 	private int bookingId;
 	private int userId;
-	private Date bookingDate;
+	private String bookingDate;
 	private double cost;
 	private int passengerCount;
 	private String bookingState;
 	private int flightNumber;
+	
+	public Booking(int bookingId, int userId, String bookingDate, double cost, int passengerCount, String bookingState,
+			int flightNumber) {
+		super();
+		this.bookingId = bookingId;
+		this.userId = userId;
+		this.bookingDate = bookingDate;
+		this.cost = cost;
+		this.passengerCount = passengerCount;
+		this.bookingState = bookingState;
+		this.flightNumber = flightNumber;
+	}
+	public Booking() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Booking(int userId, String bookingDate, double cost, int passengerCount, String bookingState,
+			int flightNumber) {
+		super();
+		this.userId = userId;
+		this.bookingDate = bookingDate;
+		this.cost = cost;
+		this.passengerCount = passengerCount;
+		this.bookingState = bookingState;
+		this.flightNumber = flightNumber;
+	}
+	
+	
 	
 	public int getBookingId() {
 		return bookingId;
@@ -24,10 +52,10 @@ public class Booking {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	public Date getBookingDate() {
+	public String getBookingDate() {
 		return bookingDate;
 	}
-	public void setBookingDate(Date bookingDate) {
+	public void setBookingDate(String bookingDate) {
 		this.bookingDate = bookingDate;
 	}
 	public double getCost() {
@@ -60,30 +88,6 @@ public class Booking {
 				+ cost + ", passengerCount=" + passengerCount + ", bookingState=" + bookingState + ", flightNumber="
 				+ flightNumber + "]";
 	}
-	public Booking(int bookingId, int userId, Date bookingDate, double cost, int passengerCount, String bookingState,
-			int flightNumber) {
-		super();
-		this.bookingId = bookingId;
-		this.userId = userId;
-		this.bookingDate = bookingDate;
-		this.cost = cost;
-		this.passengerCount = passengerCount;
-		this.bookingState = bookingState;
-		this.flightNumber = flightNumber;
-	}
-	public Booking() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public Booking(int userId, Date bookingDate, double cost, int passengerCount, String bookingState,
-			int flightNumber) {
-		super();
-		this.userId = userId;
-		this.bookingDate = bookingDate;
-		this.cost = cost;
-		this.passengerCount = passengerCount;
-		this.bookingState = bookingState;
-		this.flightNumber = flightNumber;
-	}
+	
 	
 }
