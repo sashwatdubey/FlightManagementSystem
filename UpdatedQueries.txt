@@ -1,7 +1,7 @@
 create table user(userid int(10) primary key auto_increment,username varchar(30),password varchar(30),mobileno mediumtext,emailid varchar(30));
 
 
-create table passenger(pnr_no int(10) auto_increment primary key,passenger_name varchar(30),passenger_age int(10),aadhar mediumtext,luggage double(5,3),userid int(10),foreign key(userid) references user(userid),passenger_gender varchar(10),booking_date varchar(100) bookingId int);
+create table passenger(pnr_no int(10) auto_increment primary key,passenger_name varchar(30),passenger_age int(10),aadhar mediumtext,luggage double(5,3),userid int(10),foreign key(userid) references user(userid),passenger_gender varchar(10),booking_date varchar(100), bookingId int);
 
 
 create table flight(flight_number int(10) auto_increment primary key,flight_model varchar(30) UNIQUE, carrier_name varchar(30),seat_capacity int(10));
